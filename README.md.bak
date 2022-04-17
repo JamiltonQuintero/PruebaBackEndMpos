@@ -43,3 +43,10 @@ Access
 ```
 http://localhost:8080
 ```
+
+Try on the server
+--------
+
+```
+https://time-in-words.herokuapp.com
+```
