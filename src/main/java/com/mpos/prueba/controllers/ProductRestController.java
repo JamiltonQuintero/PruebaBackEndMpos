@@ -132,4 +132,16 @@ public class ProductRestController {
     	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
+    
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @PostMapping(path = "/addTagsToProductById")
+    public ResponseEntity<?> addTagsToProductById(@RequestParam(required = true) Long productId, @RequestParam List<String> lTags) {
+    	try {
+    		productService.addTagsToProductById(productId, lTags);
+    	    return new ResponseEntity<>(HttpStatus.OK);
+    	} catch (Exception ex1) {
+    	    _logger.error(ex1.toString());
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
+    	}
+    }
 }

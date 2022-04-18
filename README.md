@@ -2,7 +2,7 @@
 
 Instalación local
 
-Prueba BackEnd desarrollada en java en la version 8 y springboot en su version 2.1.3 con el framework sts(spring tool suite)
+Prueba BackEnd desarrollada en java en la version 8 y springboot en su version 2.1.3 con sts(spring tool suite)
 
 Base de datos: Sql Server 2019
 

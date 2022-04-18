@@ -15,8 +15,17 @@ import javax.persistence.Table;
 
 import com.fasterxml.jackson.annotation.JsonIgnore;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "product")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class Product {
 	
     @Id
@@ -48,98 +57,4 @@ public class Product {
 	@Column(name = "STATE")
 	private int state;
 
-	public Product(Long id, String name, ProductCategory productCategory, float price, List<String> listOfTags,
-			Date dateOfCreation, Date dateOfLastUpdate, int state) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.productCategory = productCategory;
-		this.price = price;
-		this.listOfTags = listOfTags;
-		this.dateOfCreation = dateOfCreation;
-		this.dateOfLastUpdate = dateOfLastUpdate;
-		this.state = state;
-	}
-		
-	public Product(String name, ProductCategory productCategory, float price, List<String> listOfTags,
-			Date dateOfCreation, Date dateOfLastUpdate, int state) {
-		super();
-		this.name = name;
-		this.productCategory = productCategory;
-		this.price = price;
-		this.dateOfCreation = dateOfCreation;
-		this.dateOfLastUpdate = dateOfLastUpdate;
-		this.state = state;
-	}
-
-
-
-	public Product() {
-		super();
-	}
-
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public ProductCategory getProductCategory() {
-		return productCategory;
-	}
-
-	public void setProductCategory(ProductCategory productCategory) {
-		this.productCategory = productCategory;
-	}
-
-	public float getPrice() {
-		return price;
-	}
-
-	public void setPrice(float price) {
-		this.price = price;
-	}
-
-	public List<String> getListOfTags() {
-		return listOfTags;
-	}
-
-	public void setListOfTags(List<String> listOfTags) {
-		this.listOfTags = listOfTags;
-	}
-
-	public Date getDateOfCreation() {
-		return dateOfCreation;
-	}
-
-	public void setDateOfCreation(Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
-	}
-
-	public Date getDateOfLastUpdate() {
-		return dateOfLastUpdate;
-	}
-
-	public void setDateOfLastUpdate(Date dateOfLastUpdate) {
-		this.dateOfLastUpdate = dateOfLastUpdate;
-	}
-
-	public int isState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-		
 }

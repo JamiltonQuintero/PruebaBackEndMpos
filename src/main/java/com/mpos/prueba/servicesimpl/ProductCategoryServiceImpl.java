@@ -92,7 +92,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 		
 		ProductCategory productCategoryById =  productCategoryRepository.findById(id).get();
 		if(!isChangeState) {
-			if(EState.ELIMINATED.getId() == productCategoryById.isState() || EState.INACTIVE.getId() == productCategoryById.isState()) {
+			if(EState.ELIMINATED.getId() == productCategoryById.getState() || EState.INACTIVE.getId() == productCategoryById.getState()) {
 				throw new UsernameNotFoundException(String.format(IMsmStrings.MSM_NOT_FOUND_INACTIVE_OR_ELIMINATED, id));			
 			}
 		}
@@ -106,7 +106,7 @@ public class ProductCategoryServiceImpl implements ProductCategoryService {
 
 
 	private List<ProductCategory> filterProductCategoryDiferentStateInactiveAndEliminated(List<ProductCategory> lProductCategory) {
-		return lProductCategory.stream().filter(productCategory -> productCategory.isState() != EState.ELIMINATED.getId() && productCategory.isState() != EState.INACTIVE.getId())
+		return lProductCategory.stream().filter(productCategory -> productCategory.getState() != EState.ELIMINATED.getId() && productCategory.getState() != EState.INACTIVE.getId())
 		.collect(Collectors.toList());
 		 
 	}
