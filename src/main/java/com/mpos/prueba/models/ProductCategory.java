@@ -11,8 +11,17 @@ import javax.persistence.Id;
 import javax.persistence.OneToMany;
 import javax.persistence.Table;
 
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
+
 @Entity
 @Table(name = "product_category")
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
 public class ProductCategory {
 	
     @Id
@@ -34,68 +43,5 @@ public class ProductCategory {
      
     @OneToMany(mappedBy="productCategory")
     private List<Product> products;
-     
-	public ProductCategory(Long id, String name, Date dateOfCreation, Date dateOfLastUpdate,
-			int state, List<Product> products) {
-		super();
-		this.id = id;
-		this.name = name;
-		this.dateOfCreation = dateOfCreation;
-		this.dateOfLastUpdate = dateOfLastUpdate;
-		this.state = state;
-		this.products = products;
-	}
-		
-	public ProductCategory() {
-		super();
-	}
 
-	public Long getId() {
-		return id;
-	}
-
-	public void setId(Long id) {
-		this.id = id;
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-
-	public Date getDateOfCreation() {
-		return dateOfCreation;
-	}
-
-	public void setDateOfCreation(Date dateOfCreation) {
-		this.dateOfCreation = dateOfCreation;
-	}
-
-	public Date getDateOfLastUpdate() {
-		return dateOfLastUpdate;
-	}
-
-	public void setDateOfLastUpdate(Date dateOfLastUpdate) {
-		this.dateOfLastUpdate = dateOfLastUpdate;
-	}
-
-	public int isState() {
-		return state;
-	}
-
-	public void setState(int state) {
-		this.state = state;
-	}
-
-	public List<Product> getProducts() {
-		return products;
-	}
-
-	public void setProducts(List<Product> products) {
-		this.products = products;
-	}
-	   
 }

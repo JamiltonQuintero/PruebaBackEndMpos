@@ -1,5 +1,6 @@
 package com.mpos.prueba.servicesimpl;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 import java.util.stream.Collectors;
@@ -100,11 +101,23 @@ public class ProductServiceImpl implements ProductService {
 		return filterProductDiferentStateInactiveAndEliminated(lAllProducts);
 	}
 	
+
+	@Override
+	public void addTagsToProductById(Long productId, List<String> lTags) {
+		
+		Product product = findProductById(productId, false);	
+		List<String> mergeTags = new ArrayList<String>();
+		mergeTags.addAll(product.getListOfTags());
+		mergeTags.addAll(lTags);
+		product.setListOfTags(mergeTags);
+		save(product);		
+	}
+	
 	
 	private Product findProductById(Long id, boolean isChangeState) {
 		Product productById =  productRepository.findById(id).get();
 		if(!isChangeState) {
-			if(EStateProduct.ELIMINATED.getId() == productById.isState() || EStateProduct.INACTIVE.getId() == productById.isState()) {
+			if(EStateProduct.ELIMINATED.getId() == productById.getState() || EStateProduct.INACTIVE.getId() == productById.getState()) {
 				throw new UsernameNotFoundException(String.format(IMsmStrings.MSM_NOT_FOUND_INACTIVE_OR_ELIMINATED, id));			
 			}
 		}
@@ -117,8 +130,9 @@ public class ProductServiceImpl implements ProductService {
 
 
 	private List<Product> filterProductDiferentStateInactiveAndEliminated(List<Product> lProducts) {
-		return lProducts.stream().filter(product -> product.isState() != EStateProduct.ELIMINATED.getId() && product.isState() != EStateProduct.INACTIVE.getId())
+		return lProducts.stream().filter(product -> product.getState() != EStateProduct.ELIMINATED.getId() && product.getState() != EStateProduct.INACTIVE.getId())
 				.collect(Collectors.toList());	 
 	}
+
 	
 }

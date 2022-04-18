@@ -20,5 +20,7 @@ public interface ProductService {
 	void changeStateProductById(Long id, int newState);
 	
 	List<Product> getAllProducts();
+	
+	void addTagsToProductById(Long productId, List<String> lTags);
 
 }

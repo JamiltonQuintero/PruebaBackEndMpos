@@ -2,26 +2,19 @@ package com.mpos.to;
 
 import com.fasterxml.jackson.annotation.JsonProperty;
 
-public class ProductCategoryGetTO {
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
+@Getter
+@Setter
+@AllArgsConstructor
+@NoArgsConstructor
+
+public class ProductCategoryGetTO {
+	
 	@JsonProperty("name")
 	private String name;
-	
-	public ProductCategoryGetTO(String name) {
-		super();
-		this.name = name;
-	}
-
-	public ProductCategoryGetTO() {
-		super();
-	}
-
-	public String getName() {
-		return name;
-	}
-
-	public void setName(String name) {
-		this.name = name;
-	}
-	
+		
 }

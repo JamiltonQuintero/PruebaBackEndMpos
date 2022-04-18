@@ -118,7 +118,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 	private User findUserById(Long id,boolean isChangeState) {
 		User userById =  userRepository.findById(id).get();
 		if(!isChangeState) {
-			if(EState.ELIMINATED.getId() == userById.isState() || EState.INACTIVE.getId() == userById.isState()) {
+			if(EState.ELIMINATED.getId() == userById.getState() || EState.INACTIVE.getId() == userById.getState()) {
 				throw new UsernameNotFoundException(String.format(IMsmStrings.MSM_NOT_FOUND_INACTIVE_OR_ELIMINATED, id));			
 			}
 		}	
@@ -131,7 +131,7 @@ public class UserServiceImpl implements UserService, UserDetailsService  {
 	}
 
 	private List<User> filterUserDiferentStateInactiveAndEliminated(List<User> lUsers) {
-		return lUsers.stream().filter(user -> user.isState() != EState.ELIMINATED.getId() && user.isState() != EState.INACTIVE.getId())
+		return lUsers.stream().filter(user -> user.getState() != EState.ELIMINATED.getId() && user.getState() != EState.INACTIVE.getId())
 				.collect(Collectors.toList()); 
 	}
 

@@ -15,7 +15,7 @@ public final class JwtUserFactory {
     }
 
     public static JwtUser create(User user) {
-    	boolean isEnabled = (user.isState() == EStateProduct.INACTIVE.getId() || user.isState() == EStateProduct.ELIMINATED.getId())? false:true;
+    	boolean isEnabled = (user.getState() == EStateProduct.INACTIVE.getId() || user.getState() == EStateProduct.ELIMINATED.getId())? false:true;
         return new JwtUser(
                 user.getId(),
                 user.getFullName(),
