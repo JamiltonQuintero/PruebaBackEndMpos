@@ -5,7 +5,7 @@ import java.util.stream.Collectors;
 import org.springframework.security.core.GrantedAuthority;
 import org.springframework.security.core.authority.SimpleGrantedAuthority;
 
-import com.mpos.prueba.enums.EState;
+import com.mpos.prueba.enums.EStateProduct;
 import com.mpos.prueba.models.Authority;
 import com.mpos.prueba.models.User;
 
@@ -15,7 +15,7 @@ public final class JwtUserFactory {
     }
 
     public static JwtUser create(User user) {
-    	boolean isEnabled = (user.isState() == EState.INACTIVE.getId() || user.isState() == EState.ELIMINATED.getId())? false:true;
+    	boolean isEnabled = (user.isState() == EStateProduct.INACTIVE.getId() || user.isState() == EStateProduct.ELIMINATED.getId())? false:true;
         return new JwtUser(
                 user.getId(),
                 user.getFullName(),

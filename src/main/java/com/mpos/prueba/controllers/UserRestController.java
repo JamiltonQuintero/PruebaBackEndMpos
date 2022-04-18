@@ -11,6 +11,7 @@ import org.springframework.security.access.prepost.PreAuthorize;
 import org.springframework.web.bind.annotation.CrossOrigin;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
+import org.springframework.web.bind.annotation.PutMapping;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestParam;
@@ -19,6 +20,7 @@ import com.mpos.prueba.services.UserService;
 import com.mpos.prueba.utils.MapStructMapper;
 import com.mpos.to.UserGetTO;
 import com.mpos.to.UserPostTO;
+import com.mpos.to.UserPutTO;
 import com.mpos.to.UserCompleteReportTO;
 
 @RestController()
@@ -35,15 +37,26 @@ public class UserRestController {
     MapStructMapper mapStructMapper;
      
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @PostMapping(path = "/saveUpdateUser")
-    public ResponseEntity<?> saveUpdateUser(@RequestBody(required = true) UserPostTO userPostTO) {
+    @PostMapping(path = "/saveUser")
+    public ResponseEntity<?> saveUser(@RequestBody(required = true) UserPostTO userPostTO) {
     	try {
-    		//userService.saveUpdateUser(MapStructMapper.INSTANCE.userPostTOToUser(userPostTO));
-    		userService.saveUpdateUser(userPostTO);
+    		userService.saveUser(userPostTO);
     	    return new ResponseEntity<>(HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(), HttpStatus.BAD_REQUEST);
+    	}
+    }
+    
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @PutMapping(path = "/updateUser")
+    public ResponseEntity<?> updateUser(@RequestParam(required = true) Long id,@RequestBody(required = true) UserPutTO userPutTO) {
+    	try {
+    		userService.updateUser(id, userPutTO);
+    	    return new ResponseEntity<>(HttpStatus.OK);
+    	} catch (Exception ex1) {
+    	    _logger.error(ex1.toString());
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
     
@@ -51,25 +64,23 @@ public class UserRestController {
     @GetMapping(path = "/getUserById")
     public ResponseEntity<?> getUserById(@RequestParam(required = true) Long id) {
     	try {
-    		//UserGetTO userById = MapStructMapper.INSTANCE.userToUserGetTO(userService.getUserById(id));
-    		UserGetTO userById = mapStructMapper.userToUserGetTO(userService.getUserById(id));
+    		UserGetTO userById = mapStructMapper.userToUserGetTO(userService.getUserByUserId(id));
     	    return new ResponseEntity<>(userById, HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
     
     @CrossOrigin(origins = "*", maxAge = 3600)
-    @GetMapping(path = "/getUserByIdCompleteReport")
-    public ResponseEntity<?> getUserByIdCompleteReport(@RequestParam(required = true) Long id) {
+    @GetMapping(path = "/getUserByIdForCompleteReport")
+    public ResponseEntity<?> getUserByIdForCompleteReport(@RequestParam(required = true) Long id) {
     	try {
-    		//UserReportTO userById = MapStructMapper.INSTANCE.userToUserReportTO(userService.getUserById(id));
-    		UserCompleteReportTO userById = mapStructMapper.userToUserReportTO(userService.getUserById(id));
+    		UserCompleteReportTO userById = mapStructMapper.userToUserReportTO(userService.getUserByUserId(id));
     	    return new ResponseEntity<>(userById, HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
     
@@ -77,12 +88,23 @@ public class UserRestController {
     @GetMapping(path = "/getUserByUsername")
     public ResponseEntity<?> getUserByUsername(@RequestParam(required = true) String username) {
     	try {
-    		//UserGetTO userByUsername = MapStructMapper.INSTANCE.userToUserGetTO(userService.getUserByUsername(username));
     		UserGetTO userByUsername = mapStructMapper.userToUserGetTO(userService.getUserByUsername(username));
     	    return new ResponseEntity<>(userByUsername,HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
+    	}
+    }
+    
+    @CrossOrigin(origins = "*", maxAge = 3600)
+    @GetMapping(path = "/getAllUsers")
+    public ResponseEntity<?> getAllUsers() {
+    	try {
+    		List<UserGetTO>  lAllUsers = mapStructMapper.usersToUsersGetTOs(userService.getAllUsers());
+    	    return new ResponseEntity<>(lAllUsers,HttpStatus.OK);
+    	} catch (Exception ex1) {
+    	    _logger.error(ex1.toString());
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
     
@@ -94,7 +116,7 @@ public class UserRestController {
     	    return new ResponseEntity<>(usersByAutorityId,HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
 
@@ -103,11 +125,11 @@ public class UserRestController {
     @PostMapping(path = "/changeStateUserById")
     public ResponseEntity<?> changeStateUserById(@RequestParam(required = true) Long id, @RequestParam(required = true) int newState) {
     	try {
-    		userService.changeStateUserById(id, newState);
+    		userService.changeStateByUserId(id, newState);
     	    return new ResponseEntity<>(HttpStatus.OK);
     	} catch (Exception ex1) {
     	    _logger.error(ex1.toString());
-    	    return new ResponseEntity<>(HttpStatus.BAD_REQUEST);
+    	    return new ResponseEntity<>(ex1.toString(),HttpStatus.BAD_REQUEST);
     	}
     }
 

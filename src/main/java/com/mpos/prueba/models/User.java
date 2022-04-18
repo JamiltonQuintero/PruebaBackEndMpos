@@ -58,7 +58,6 @@ public class User {
 	private int state;
 
     
-    
 	public User(Long id, String fullName, String username, String password, String email, Date dateOfCreation,
 			Date dateOfLastEntry, Date lastPasswordResetDate, List<Authority> authorities, int state) {
 		super();

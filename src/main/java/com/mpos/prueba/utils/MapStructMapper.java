@@ -4,6 +4,7 @@ import java.util.List;
 
 import org.mapstruct.Mapper;
 import org.mapstruct.factory.Mappers;
+import org.springframework.security.core.userdetails.UserDetails;
 
 import com.mpos.prueba.models.Product;
 import com.mpos.prueba.models.ProductCategory;
@@ -39,6 +40,8 @@ public interface MapStructMapper {
 	
 	List<UserGetTO> usersToUsersGetTOs(List<User> Users);
 	
+	User userDetailToUser (UserDetails userDetails);
+	
 	//** Product
 	
 	ProductGetTO productToProductGetTO(Product product);
@@ -58,16 +61,18 @@ public interface MapStructMapper {
 	
 	//** ProductCategory
 		
-	ProductCategoryGetTO ProductCategoryToProductCategoryGetTO(ProductCategory productCategory);
+	ProductCategoryGetTO productCategoryToProductCategoryGetTO(ProductCategory productCategory);
 	
 	ProductCategory productCategoryGetTOToProductCategory(ProductCategoryGetTO productCategoryGetTO);
 	
 	ProductCategoryPostTO productCategoryToProductCategoryPostTO(ProductCategory product);
 	
-	ProductCategory ProductCategoryPostTOToProduct(ProductCategoryPostTO productCategoryPostTO);
+	ProductCategory productCategoryPostTOToProduct(ProductCategoryPostTO productCategoryPostTO);
 	
 	ProductCategoryCompleteReportTO productCategoryToProductCategoryCompleteReportTO(ProductCategory product);
 	
 	ProductCategory productCategoryCompleteReportTOToProduct(ProductCategoryCompleteReportTO productCategoryCompleteReportTO);
+	
+	List<ProductCategoryGetTO> productCategoryToProductCategoryGetTOs(List<ProductCategory> products);
 
 }
