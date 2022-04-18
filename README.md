@@ -21,7 +21,7 @@ Run
 --------
 
 Para ejecutar el proyecto sin inconvenientes debes realizar los sigueointes pasos:
-1 - Ejecutar el script de base de datos Sql Server
+1 - Ejecutar Los scrips de base de datos Sql Server 1. Create DataBse 2. CreateTables and Scrips
 2 - Ingresar a la raiz del proyecto y modificar el archivo env-variables con las credenciales de tu base de datos Sql Server.
 3 - Si no tienes habilidato el puerto 1433 por favor sigue estos pasos:
 ```sh
